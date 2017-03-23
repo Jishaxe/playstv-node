@@ -11,6 +11,10 @@ class PlaysTV {
     this.users = {
       get: this.getUser.bind(this)
     }
+
+    this.videos = {
+      search: this.searchVideos.bind(this)
+    }
   }
   
   /**
@@ -45,6 +49,22 @@ class PlaysTV {
    */
   getUser(username) {
     return this._get(`/users/${username}`, {}).then((response) => Promise.resolve(JSON.parse(response.body).content, (error) => Promise.reject(error)))
+  }
+
+  /**
+   * Search videos matching the provided parameters in searchParams
+   * userId string Plays.tv handle of the user who curated the video
+   * gameId string Plays.tv ID of the game
+   * hashtags Array of hashtags without the hashtag (#)
+   * metatags An array of metatags with the hashtag (#) removed
+   * @param {Object} searchParams 
+   * @param {Number} limit Results per page
+   * @param {Number} page Page number to get
+   * @param {String} sort Sorting technique (trending, popular, recent)
+   * @param {String} sortdir Direction to sort (asc, desc)
+   */
+  searchVideos(searchParams, limit = 20, page = 0, sort = "recent", sortdir = "asc") {
+
   }
 }
 
